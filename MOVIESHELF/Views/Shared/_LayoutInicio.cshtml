@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>@ViewBag.Title</title>
+        @Styles.Render("~/Content/css_main")
+        @Styles.Render("~/Content/bootstrap")
+        @Scripts.Render("~/bundles/modernizr")
+        <link href='http://fonts.googleapis.com/css?family=Paytone+One' rel='stylesheet' type='text/css'>
+    </head>
+    
+    <body>
+        <div class="container" id="Header">
+            <div id="pageTitle">MOVIESHELF</div>
+        </div>
+        @RenderBody();
+
+        <div class="container text-center" id="bottom-bar">
+            <p class="text-footer">@@Author: Hernando Delgado.</p>
+            <p class="text-footer">email: hernando.delgado01@gmail.com</p>
+            <p class="text-footer">C#.Net Programming Course.Technological Institute of the Americas ITLA</p>
+        </div>
+
+        @Scripts.Render("~/bundles/jquery")
+        @RenderSection("scripts", required: false)
+    </body>
+
+</html>

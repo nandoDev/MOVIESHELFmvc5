@@ -1,0 +1,61 @@
+﻿@model MOVIESHELF.Models.Movie_Users
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>Movie_Users</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.IdRelMovie_User)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.IdRelMovie_User)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.idUser)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.idUser)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.idMovie)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.idMovie)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Seen)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Seen)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Favorite)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Favorite)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.PersonalScore)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.PersonalScore)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

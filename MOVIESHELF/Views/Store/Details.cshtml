@@ -1,0 +1,168 @@
+﻿@model MOVIESHELF.Models.Movies1
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div class="container" id="movie-detail">
+    <div id="col-left-moviedetail">
+        <div id="picture-movie-detail">
+            <img alt="@Model.Title" src="@Model.PosterUrl" id="imagen">
+        </div>
+        <div id="text-moviedetail">
+            <div class="text-left">
+               <p class="data-moviedetail-left">
+                    @{var id_User = Session["LogedUserId"];}
+                    @{var idSession = Convert.ToInt32(id_User);}
+                    @foreach (var personalData in Model.Movie_Users)
+                    {
+                        if(personalData.idUser.Equals(idSession))
+                        {
+                            if (@personalData.Seen==true)
+                            {
+                                <span >Seen</span>
+                            }
+                            else
+                            {
+                               <span >Not Seen</span> 
+                            }
+                        }
+                    }
+                </p>
+            </div>
+            <div class="text-left">
+                <p class="data-moviedetail-left"><span>Personal Score:</span><br />
+                    @foreach (var personalData in Model.Movie_Users)
+                    {
+                        if (personalData.idUser.Equals(idSession))
+                        {
+                        <span class="rateit" data-rateit-value="@personalData.PersonalScore" data-rateit-ispreset="true"
+                             data-rateit-readonly="true" data-rateit-min="0" data-rateit-max="10"></span>
+                        }
+                    
+                    }
+                </p>
+            </div>
+            <div class="text-left">
+                <p class="data-moviedetail-left"><span>
+                    Storage:
+                    @foreach (var personalData in Model.Movie_Users)
+                    {
+                        if (personalData.idUser.Equals(idSession))
+                        {
+                            foreach (var personal in personalData.MovieUser_TypeStorage)
+                            {
+                            <span>@personal.TypeStorage.TypeStorage1</span>
+                            }
+                        }
+                    }
+                </span>
+                </p>
+            </div>
+            <div class="text-left">
+                <p class="data-moviedetail-left">
+                    @foreach (var personalData in Model.Movie_Users)
+                    {
+                        if (personalData.idUser.Equals(idSession))
+                            {
+                                if (@personalData.Favorite == true)
+                                {
+                                    <span>Favorite</span>
+                                }
+                                else
+                                {
+                                    <span>Not Favorite</span>
+                                }
+                            }
+                    }
+                </p>
+            </div>
+        </div>
+     </div>
+    <div id="col-right-moviedetail">
+
+        <div class="text-left" id="title-detailMovie">
+            <p><h1><strong>@Html.DisplayFor(model => model.Title)</strong></h1></p>
+            <p id="linkImdb"><a href="@Html.DisplayFor(model=>model.ImdbId)">See in Imdb</a></p>
+        </div>
+        <br />
+        <div class="text-left">
+            <p>
+                <span class="titles-moviedetail">
+                    Year:
+                </span><br />
+                <span class="data-moviedetail">
+                @Html.DisplayFor(model => model.Year)
+                </span>
+            </p>
+        </div>
+        <div class="text-left">
+            <p>
+                <span class="titles-moviedetail">
+                    Director:
+                </span><br/>
+                <span class="data-moviedetail">
+                    @foreach (var directors in Model.Movie_Director)
+                    {@directors.Director.nameDirector}
+                </span>
+            </p>
+        </div>
+        <div class="text-left">
+            <p>
+                <span class="titles-moviedetail">
+                    Country:
+                </span><br />
+                <span class="data-moviedetail">
+                    @foreach (var countries in Model.Movie_Country)
+                    {@countries.Country.Name <span>, </span>}
+                </span>
+            </p>
+        </div>
+        <div class="text-left">
+            <p>
+                <span class="titles-moviedetail">
+                    Genres:
+                </span><br />
+                <span class="data-moviedetail">
+                    @foreach (var genres in Model.Movies_Genres)
+                    {@genres.Genre.Name <span>, </span>}
+                </span>
+            </p>
+        </div>
+        <div class="text-left">
+            <p>
+                <span class="titles-moviedetail">
+                    Main Actors:
+                </span><br />
+                <span class="data-moviedetail">
+                    @foreach (var actors in Model.Movie_Actors)
+                    {@actors.Actor.Name <span>, </span>}
+               </span>
+           </p>
+        </div>
+        <br />
+        @foreach (var personalData in Model.Movie_Users)
+                    {
+                        if (personalData.idUser.Equals(idSession))
+                        { ViewBag.idMovieUser= personalData.IdRelMovie_User;}
+        }
+
+         <p>   @Html.ActionLink("Edit", "Edit", new { id = ViewBag.idMovieUser }, new { @class = "titles-moviedetail" }) |
+            @Html.ActionLink("Back to List", "Index", null, new { @class = "titles-moviedetail" })
+        </p>
+    </div>
+</div>
+
+
+<!--<div id="static-review" data-score="3"></div>-->
+<script  type="text/javascript">
+    $(document).on('ready', function () {
+        $('#static-review').raty({
+            score: function () {
+                return $(this).attr('data-score');
+            },
+            readOnly: true
+        })
+    })
+</script>
+

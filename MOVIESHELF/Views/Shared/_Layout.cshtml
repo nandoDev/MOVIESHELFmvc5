@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+    
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>@ViewBag.Title</title>
+        @Styles.Render("~/Content/css_main")
+        @Styles.Render("~/Content/bootstrap")
+       
+        @Scripts.Render("~/bundles/modernizr")
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/jqueryrateit")
+        @Scripts.Render("~/bundles/ScriptMovieShelf")
+   
+        
+
+        <link href='http://fonts.googleapis.com/css?family=Paytone+One' rel='stylesheet' type='text/css'>
+    </head>
+    <body>
+        <div class="container" id="Header">
+            <div id="pageTitle">MOVIESHELF</div>
+        </div>
+        <div class="container" id="top-bar">
+            <ul class="nav navbar-nav navbar-left">
+               <li><a href="@Url.Action("Index", "Store")">Index</a></li>
+               <li><a href="@Url.Action("SearchMovie", "Store")">Search Movies</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+               @if (Session["LogedUsername"] != null)
+               {<li><a href="#">User: <span id="username">@Session["LogedUsername"].ToString()</span></a></li>}
+               <li><a href="#">Contact</a></li>
+               <li><a href="@Url.Action("log_Out", "LogOut")">Log Out</a></li>
+            </ul>
+         </div>
+
+            <div class="container">
+                <div class="row" >
+                    <div class="well col-md-2 col-xs-2" id="columnaIzquierda">
+                        @{Html.RenderAction("GenreMenu", "Store");}
+                    </div>
+                    <div class="well col-md-8 col-xs-8 div_Panel1" id="columnaCentro">
+                        @RenderBody()
+                    </div>
+                    <div class="well col-md-2" id="columnaDerecha">
+                        @{Html.RenderAction("FiltersMenu", "Store");}
+                    </div>
+
+                </div>
+            </div>
+       
+        <div class="container text-center" id="bottom-bar">
+            <p class="text-footer">@@Author: Hernando Delgado.</p>
+            <p class="text-footer">email: hernando.delgado01@gmail.com</p>
+            <p class="text-footer">C#.Net Programming Course.Technological Institute of the Americas ITLA</p>
+        </div>
+        @Styles.Render("~/Content/rateit")
+        @Scripts.Render("~/bundles/jqueryraty")
+        @RenderSection("scripts", required: false)
+    </body>
+
+</html>

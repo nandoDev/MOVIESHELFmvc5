@@ -1,0 +1,64 @@
+﻿@*<form role="form">*@
+    <div class="form-group">
+        @using (Html.BeginForm("BrowseByTitle", "Store", FormMethod.Post))
+        {
+         <!--<div class="form-group">
+             <input type="text" required="required" class="form-control input-sm" placeholder="Type Title" />
+             <input type="submit" value="Browse by title" class="btn btn-primary btn-sm btn-block " />
+         </div>-->
+        }
+     </div>
+        <hr >
+    <div class="form-group">
+      @using (Html.BeginForm("BrowseByYear", "Store", FormMethod.Post))
+      {
+        <input type="number" name="year" id="year" min="1880" max="2020" required="required" class="form-control input-sm" placeholder="Type Year" />
+        <input type="submit" value="Browse by year" class="btn btn-primary btn-sm btn-block " />
+      }
+    </div>
+    <hr >
+    <div class="form-group">
+       @Html.ActionLink("Browse by Country", "CountryMenu", "Store", new { @class = "btn btn-primary btn-sm btn-block", @role="button" })
+    </div>
+    <!--<hr >-->
+    <div class="form-group">
+        @using (Html.BeginForm("BrowseByRating", "Store", FormMethod.Post)){ 
+            
+        <!--<select id="selectCalificacion" class="form-control input-sm" >
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+            <option>7</option>
+            <option>8</option>
+            <option>9</option>
+            <option>10</option>
+        </select>
+        <input type="submit" value="Browse by Own Rating" class="btn btn-primary btn-sm btn-block " />-->
+        }
+    </div>
+    <!--<hr>-->
+    <div class="form-group">
+    @using (Html.BeginForm("BrowseFavorites", "Store", FormMethod.Post))
+    {
+      <!--<input type="submit" value="Browse Favorites" class="btn btn-primary btn-sm btn-block " />-->  
+    }
+   </div>
+<!--<hr>-->  
+   <div class="form-group">
+        @using (Html.BeginForm("BrowseByLocation", "Store", FormMethod.Post))
+        {
+            <!--<select id="selectUbicacion" class="form-control input-sm">
+                <option>None</option>
+                <option>Friend</option>
+                <option>Computer</option>
+                <option>Cd's Shelf</option>
+                <option>External Hard Disk</option>
+            </select>
+            <input type="submit" value="Browse by location" class="btn btn-primary btn-sm btn-block " />-->  
+        }
+    </div>
+    <hr>
+    

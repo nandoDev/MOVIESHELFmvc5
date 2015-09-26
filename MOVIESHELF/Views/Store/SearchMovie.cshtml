@@ -1,0 +1,123 @@
+﻿@model MOVIESHELF.Models.Movies1
+
+@{
+    ViewBag.Title = "Search a Movie";
+}
+@Scripts.Render("~/bundles/jquery")
+<h2>Search Movies</h2>
+
+<div id="w">
+   <div class="form-group-lg">
+        <input type="text" class="form-group col-lg-5" placeholder="type Movie" name="SearchTitle" id="searchMovie"  />
+        <input type="submit" class="form-group col-lg-2 btn-primary "  id="submitSearch" value="search" />
+    </div>
+    <div id="imdbWait"></div>
+        <br/>
+    <div id="imdbcontents" class="clearfix">
+        <div id ="foundedMovies"></div>
+    </div>
+</div>
+<div id="result"></div>
+
+<script type="text/javascript">
+    function sendTitles(newTitle) {
+        var url = (function(){
+            return '/Store/AddMovie?newTitle=param-name'
+                 .replace('param-name', encodeURIComponent(newTitle));
+        })();
+        window.location = url;
+    }
+    
+    $('#submitSearch').on('click', function (e) {
+        e.preventDefault();
+        var count = 0;
+        var countmovie = 0;
+        var imdbTitle = $('input[name=SearchTitle]').val();
+
+        var resturl = "http://omdbapi.com/?s=" + imdbTitle + "";
+        
+        $('#imdbWait').html('<center><img src="/Content/img/loading.gif" alt="loading..."></center>');
+        var cdiv = $('#foundedMovies');
+       
+        $.ajax({
+            url: resturl,
+            dataType: 'json',
+            success: function (dato) {
+                
+                var title = dato.Search;
+                $('#imdbWait').html('<span></span>');
+                
+                cdiv.append("<br/>");
+                for (var n in title) {
+                    if (title[n].Type === "movie") {
+                        count++;
+                    }
+                }
+                    
+                    for (var m in title) {
+                    
+                    if (title[m].Type === "movie") {
+                        var titulo = title[m].Title;
+                        
+                        var resturlTitles = "http://omdbapi.com/?t=" + titulo + "";
+                        $.ajax({
+                            url: resturlTitles,
+                            dataType: 'json',
+                            success: function (data)
+                            {
+                                countmovie++;
+                                var titleMovie = data.Title;
+                                var year = data.Year;
+                                var director = data.Director;
+                                var posterMovie = data.Poster;
+                                var imdbLink = "http://www.imdb.com/title/" + data.imdbID + "";
+                                if (posterMovie === "N/A") {
+                                    posterMovie = "/Content/img/sample.jpg";
+                                };
+                                
+                                cdiv.append("<div class='containImageSearch'><img class='imageSearch' src=" + posterMovie + "></div>" +
+                                    "<div class='containMovieData'><a href='#'>" + "<span class='listaCatalogo'>" + titleMovie + "</span>" + "<nobr class='listaCatalogo'>" + " (" + year + ")" + "</nobr>" + "</a><h4>Director: " + director + "</h4>"
+                                    + "<h3><a href=" + imdbLink + "><nobr class= listaCatalogo>Link Imdb" + "</nobr></a></h3></div>");
+
+                                 if (countmovie === count) {
+                                    cdiv.append("<br/><input type='submit' class='btn btn-primary' id='newSearch' value='new search' />");
+                                    $('#newSearch').on('click', function (e) {
+                                        e.preventDefault();
+                                        cdiv.html("");
+                                        $('#imdbcontents').css("background-color", "white");
+                                        $('#searchMovie').val('');
+                                        $('#submitSearch').show();
+                                    });
+
+                                    var elements = document.getElementById("foundedMovies").getElementsByTagName('span');
+                                    for (var i = 0; i < elements.length; i++) {
+                                   // Añadimos el evento onclick al div
+                                    newEvent(elements[i], "click", function () {
+                                        var _title = this.innerHTML;;
+                                        sendTitles(_title);
+                                        return false;
+                                    });
+
+                                    newEvent(elements[i], "mouseenter", function () {
+                                        $(this).css("color", "navy");
+                                    });
+                                    newEvent(elements[i], "mouseleave", function () {
+                                        $(this).css("color", "black");
+                                    });
+                                    $('#submitSearch').hide();
+                                    }
+                                }
+                            }
+                        });
+                    }
+                }
+            }
+        });
+    });
+</script>
+
+
+   
+
+
+

@@ -1,0 +1,62 @@
+﻿
+
+@model IEnumerable<MOVIESHELF.Models.Movie_Users>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table table-condensed table-index">
+    <tr>
+        <th>
+           Title
+        </th>
+        <th>
+            Year
+        </th>
+        <th>
+            Directors
+        </th>
+        <th>
+            Country
+        </th>
+        <th>
+            Type of Storage
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Movies1.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Movies1.Year)
+            </td>
+            <td>
+                @foreach (var director in item.Movies1.Movie_Director)
+                {@director.Director.nameDirector <span>,</span>}
+            </td>
+            <td>
+                @foreach (var country in item.Movies1.Movie_Country)
+                {@country.Country.Name <span>,</span>}
+            </td>
+            <td>
+                @foreach (var storage in item.MovieUser_TypeStorage)
+                {@storage.TypeStorage.TypeStorage1 <span>,</span>}
+            </td>
+            <td>
+                @Html.ActionLink("Details", "Details", new { id = item.Movies1.IdMovie }) |
+                @Html.ActionLink("Edit", "Edit", new { id = item.IdRelMovie_User}) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.IdRelMovie_User})
+            </td>
+        </tr>
+    }
+
+</table>
+

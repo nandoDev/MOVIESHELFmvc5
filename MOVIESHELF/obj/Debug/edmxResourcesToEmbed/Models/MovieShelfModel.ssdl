@@ -1,0 +1,326 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DATABASE_MOVIESHELFModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Actors">
+    <Key>
+      <PropertyRef Name="IdActor" />
+    </Key>
+    <Property Name="IdActor" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Countries">
+    <Key>
+      <PropertyRef Name="IdCountry" />
+    </Key>
+    <Property Name="IdCountry" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Directors">
+    <Key>
+      <PropertyRef Name="IdDirectors" />
+    </Key>
+    <Property Name="IdDirectors" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nameDirector" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Genres">
+    <Key>
+      <PropertyRef Name="IdGenre" />
+    </Key>
+    <Property Name="IdGenre" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Movie_Actors">
+    <Key>
+      <PropertyRef Name="IdMovie_Actor" />
+    </Key>
+    <Property Name="IdMovie_Actor" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idActor" Type="int" Nullable="false" />
+    <Property Name="idMovie" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Movie_Country">
+    <Key>
+      <PropertyRef Name="IdMovie_Country" />
+    </Key>
+    <Property Name="IdMovie_Country" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idCountry" Type="int" Nullable="false" />
+    <Property Name="idMovie" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Movie_Director">
+    <Key>
+      <PropertyRef Name="IdMovie_Director" />
+    </Key>
+    <Property Name="IdMovie_Director" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idMovie" Type="int" Nullable="false" />
+    <Property Name="idDirectors" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Movie_Users">
+    <Key>
+      <PropertyRef Name="IdRelMovie_User" />
+    </Key>
+    <Property Name="IdRelMovie_User" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idUser" Type="int" Nullable="false" />
+    <Property Name="idMovie" Type="int" Nullable="false" />
+    <Property Name="Seen" Type="bit" />
+    <Property Name="Favorite" Type="bit" />
+    <Property Name="PersonalScore" Type="int" />
+  </EntityType>
+  <EntityType Name="Movies_Genres">
+    <Key>
+      <PropertyRef Name="IdMovie_Genre" />
+    </Key>
+    <Property Name="IdMovie_Genre" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idGenre" Type="int" Nullable="false" />
+    <Property Name="idMovie" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Movies1">
+    <Key>
+      <PropertyRef Name="IdMovie" />
+    </Key>
+    <Property Name="IdMovie" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Year" Type="int" Nullable="false" />
+    <Property Name="PosterUrl" Type="varchar" MaxLength="200" />
+    <Property Name="ImdbId" Type="varchar" MaxLength="200" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MovieUser_TypeStorage">
+    <Key>
+      <PropertyRef Name="IdRelMovieUser_TypeStorage" />
+    </Key>
+    <Property Name="IdRelMovieUser_TypeStorage" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idRelMovieUser" Type="int" Nullable="false" />
+    <Property Name="idTypeStorage" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="TypeStorage">
+    <Key>
+      <PropertyRef Name="IdTypeStorage" />
+    </Key>
+    <Property Name="IdTypeStorage" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TypeStorage" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="IdUsers" />
+    </Key>
+    <Property Name="IdUsers" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Username" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="email" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="Password" Type="varchar" MaxLength="10" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_ActorMovie_Actors">
+    <End Role="Actors" Type="Self.Actors" Multiplicity="1" />
+    <End Role="Movie_Actors" Type="Self.Movie_Actors" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Actors">
+        <PropertyRef Name="IdActor" />
+      </Principal>
+      <Dependent Role="Movie_Actors">
+        <PropertyRef Name="idActor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GenreMovies_Genres">
+    <End Role="Genres" Type="Self.Genres" Multiplicity="1" />
+    <End Role="Movies_Genres" Type="Self.Movies_Genres" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Genres">
+        <PropertyRef Name="IdGenre" />
+      </Principal>
+      <Dependent Role="Movies_Genres">
+        <PropertyRef Name="idGenre" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Movie_ActorsMovies">
+    <End Role="Movies1" Type="Self.Movies1" Multiplicity="1" />
+    <End Role="Movie_Actors" Type="Self.Movie_Actors" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Movies1">
+        <PropertyRef Name="IdMovie" />
+      </Principal>
+      <Dependent Role="Movie_Actors">
+        <PropertyRef Name="idMovie" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Movie_CountryCountry">
+    <End Role="Countries" Type="Self.Countries" Multiplicity="1" />
+    <End Role="Movie_Country" Type="Self.Movie_Country" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Countries">
+        <PropertyRef Name="IdCountry" />
+      </Principal>
+      <Dependent Role="Movie_Country">
+        <PropertyRef Name="idCountry" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Movie_DirectorDirector">
+    <End Role="Directors" Type="Self.Directors" Multiplicity="1" />
+    <End Role="Movie_Director" Type="Self.Movie_Director" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Directors">
+        <PropertyRef Name="IdDirectors" />
+      </Principal>
+      <Dependent Role="Movie_Director">
+        <PropertyRef Name="idDirectors" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Movie_DirectorMovies">
+    <End Role="Movies1" Type="Self.Movies1" Multiplicity="1" />
+    <End Role="Movie_Director" Type="Self.Movie_Director" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Movies1">
+        <PropertyRef Name="IdMovie" />
+      </Principal>
+      <Dependent Role="Movie_Director">
+        <PropertyRef Name="idMovie" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Movie_Users_Movies1">
+    <End Role="Movies1" Type="Self.Movies1" Multiplicity="1" />
+    <End Role="Movie_Users" Type="Self.Movie_Users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Movies1">
+        <PropertyRef Name="IdMovie" />
+      </Principal>
+      <Dependent Role="Movie_Users">
+        <PropertyRef Name="idMovie" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Movie_Users_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="Movie_Users" Type="Self.Movie_Users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="IdUsers" />
+      </Principal>
+      <Dependent Role="Movie_Users">
+        <PropertyRef Name="idUser" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Movies_GenresMovies">
+    <End Role="Movies1" Type="Self.Movies1" Multiplicity="1" />
+    <End Role="Movies_Genres" Type="Self.Movies_Genres" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Movies1">
+        <PropertyRef Name="IdMovie" />
+      </Principal>
+      <Dependent Role="Movies_Genres">
+        <PropertyRef Name="idMovie" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MoviesMovie_Country">
+    <End Role="Movies1" Type="Self.Movies1" Multiplicity="1" />
+    <End Role="Movie_Country" Type="Self.Movie_Country" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Movies1">
+        <PropertyRef Name="IdMovie" />
+      </Principal>
+      <Dependent Role="Movie_Country">
+        <PropertyRef Name="idMovie" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MovieUser_TypeStorage_Movie_Users">
+    <End Role="Movie_Users" Type="Self.Movie_Users" Multiplicity="1" />
+    <End Role="MovieUser_TypeStorage" Type="Self.MovieUser_TypeStorage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Movie_Users">
+        <PropertyRef Name="IdRelMovie_User" />
+      </Principal>
+      <Dependent Role="MovieUser_TypeStorage">
+        <PropertyRef Name="idRelMovieUser" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MovieUser_TypeStorage_TypeStorage">
+    <End Role="TypeStorage" Type="Self.TypeStorage" Multiplicity="1" />
+    <End Role="MovieUser_TypeStorage" Type="Self.MovieUser_TypeStorage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TypeStorage">
+        <PropertyRef Name="IdTypeStorage" />
+      </Principal>
+      <Dependent Role="MovieUser_TypeStorage">
+        <PropertyRef Name="idTypeStorage" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DATABASE_MOVIESHELFModelStoreContainer">
+    <EntitySet Name="Actors" EntityType="Self.Actors" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Countries" EntityType="Self.Countries" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Directors" EntityType="Self.Directors" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Genres" EntityType="Self.Genres" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Movie_Actors" EntityType="Self.Movie_Actors" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Movie_Country" EntityType="Self.Movie_Country" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Movie_Director" EntityType="Self.Movie_Director" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Movie_Users" EntityType="Self.Movie_Users" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Movies_Genres" EntityType="Self.Movies_Genres" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Movies1" EntityType="Self.Movies1" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MovieUser_TypeStorage" EntityType="Self.MovieUser_TypeStorage" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TypeStorage" EntityType="Self.TypeStorage" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_ActorMovie_Actors" Association="Self.FK_ActorMovie_Actors">
+      <End Role="Actors" EntitySet="Actors" />
+      <End Role="Movie_Actors" EntitySet="Movie_Actors" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GenreMovies_Genres" Association="Self.FK_GenreMovies_Genres">
+      <End Role="Genres" EntitySet="Genres" />
+      <End Role="Movies_Genres" EntitySet="Movies_Genres" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Movie_ActorsMovies" Association="Self.FK_Movie_ActorsMovies">
+      <End Role="Movies1" EntitySet="Movies1" />
+      <End Role="Movie_Actors" EntitySet="Movie_Actors" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Movie_CountryCountry" Association="Self.FK_Movie_CountryCountry">
+      <End Role="Countries" EntitySet="Countries" />
+      <End Role="Movie_Country" EntitySet="Movie_Country" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Movie_DirectorDirector" Association="Self.FK_Movie_DirectorDirector">
+      <End Role="Directors" EntitySet="Directors" />
+      <End Role="Movie_Director" EntitySet="Movie_Director" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Movie_DirectorMovies" Association="Self.FK_Movie_DirectorMovies">
+      <End Role="Movies1" EntitySet="Movies1" />
+      <End Role="Movie_Director" EntitySet="Movie_Director" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Movie_Users_Movies1" Association="Self.FK_Movie_Users_Movies1">
+      <End Role="Movies1" EntitySet="Movies1" />
+      <End Role="Movie_Users" EntitySet="Movie_Users" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Movie_Users_Users" Association="Self.FK_Movie_Users_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Movie_Users" EntitySet="Movie_Users" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Movies_GenresMovies" Association="Self.FK_Movies_GenresMovies">
+      <End Role="Movies1" EntitySet="Movies1" />
+      <End Role="Movies_Genres" EntitySet="Movies_Genres" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MoviesMovie_Country" Association="Self.FK_MoviesMovie_Country">
+      <End Role="Movies1" EntitySet="Movies1" />
+      <End Role="Movie_Country" EntitySet="Movie_Country" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MovieUser_TypeStorage_Movie_Users" Association="Self.FK_MovieUser_TypeStorage_Movie_Users">
+      <End Role="Movie_Users" EntitySet="Movie_Users" />
+      <End Role="MovieUser_TypeStorage" EntitySet="MovieUser_TypeStorage" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MovieUser_TypeStorage_TypeStorage" Association="Self.FK_MovieUser_TypeStorage_TypeStorage">
+      <End Role="TypeStorage" EntitySet="TypeStorage" />
+      <End Role="MovieUser_TypeStorage" EntitySet="MovieUser_TypeStorage" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

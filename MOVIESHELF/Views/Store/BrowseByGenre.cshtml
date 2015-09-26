@@ -1,0 +1,29 @@
+﻿@model MOVIESHELF.Models.Genre
+
+@{ViewBag.Title = "Browse by Genre";}
+
+<h2 class="text-center">@Model.Name Movies</h2>
+
+<ul id="movie-list">
+    @foreach (var i in Model.Movies_Genres.ToList())
+    {
+        foreach (var k in i.Movies1.Movie_Users.ToList())
+        {
+            if (k.idUser == ViewBag.logedUser)
+            {
+                <li id="item-movie-list">
+                    <a href="@Url.Action("Details", new {id = i.Movies1.IdMovie})">
+                        <div>
+                            <div class="fotoPelicula">
+                                <img alt="@i.Movies1.Title" src="@i.Movies1.PosterUrl" id="imagen">
+                            </div>
+                            <div class="text-center">
+                                <h6><strong>@i.Movies1.Title</strong><strong id="textoAño"> (@i.Movies1.Year)</strong></h6>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+            }
+         }
+     }
+</ul>

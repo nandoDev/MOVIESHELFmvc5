@@ -1,0 +1,54 @@
+﻿@model MOVIESHELF.Models.User
+
+@using (Html.BeginForm("Register", "Home", FormMethod.Post))
+{
+
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>Register</legend>
+        @if (ViewBag.Message != null)
+        {
+            <div style="border: solid 1px gray ">
+                @ViewBag.Message
+            </div>
+        }
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Username)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.Username)
+            @Html.ValidationMessageFor(model => model.Username)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.email)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.email)
+            @Html.ValidationMessageFor(model => model.email)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Password)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.Password)
+            @Html.ValidationMessageFor(model => model.Password)
+        </div>
+
+        <!--<div class="editor-label">
+            @@Html.LabelFor(model => model.confirmPassword)
+        </div>
+        <div class="editor-field">
+            @@Html.TextBoxFor(model => model.confirmPassword)
+            @@Html.ValidationMessageFor(model => model.confirmPassword)
+        </div>-->
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+

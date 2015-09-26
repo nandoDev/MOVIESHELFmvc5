@@ -1,0 +1,40 @@
+﻿@model IEnumerable<MOVIESHELF.Models.Country>
+
+@{
+    ViewBag.Title = "CountryMenu";
+}
+
+
+
+<div class="wrapper">
+    <ul id="listaCountries">
+        @foreach (var country in Model)
+        {
+            <li>
+                <a href="@Url.Action("BrowseByCountry", new { country = country.Name})" class="listaCatalogo" id="menuCountry">
+                    <h6>@country.Name 
+                        <!--<span id="ConteoGeneroPelicula">-->
+                            @{var ListMoviesByCountry = from l in country.Movie_Country select l.Movies1;
+                            var number = 0;
+                            foreach (var eachMovie in ListMoviesByCountry)
+                            {
+                                MOVIESHELF.Models.Movies1 eachMovieByCountry = (MOVIESHELF.Models.Movies1)eachMovie;
+
+                                var eachMovieByUser = eachMovieByCountry.Movie_Users.FirstOrDefault(user => user.idUser == ViewBag.logedUser);
+                                if (!(eachMovieByUser == null))
+                                {
+                                    number = number + 1;
+                                }
+                            }
+                            ViewBag.Number = number;
+                            }
+                            (@ViewBag.Number)
+                        <!--</span>-->
+                    <!--(@@country.Movie_Country.Count())--></h6>
+                </a>
+            </li>
+        }
+    </ul>
+    <br />
+</div>
+

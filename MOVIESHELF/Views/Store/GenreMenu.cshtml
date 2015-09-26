@@ -1,0 +1,28 @@
+﻿@model IEnumerable<MOVIESHELF.Models.Genre>
+
+<ul class="listaNoSangrada">
+    @foreach (var genre in Model)
+    {
+     <li>
+        @Html.ActionLink(genre.Name,"BrowseByGenre", "Store", new { genre = genre.Name }, new { @class = "listaCatalogo" })
+        <span id="ConteoGeneroPelicula">
+           @{var ListMoviesByGenre= from l in genre.Movies_Genres select l.Movies1;
+                var number=0;
+                foreach (var eachMovie in ListMoviesByGenre)
+                {
+                    MOVIESHELF.Models.Movies1 eachMovieByGenre = (MOVIESHELF.Models.Movies1)eachMovie;
+
+                    var eachMovieByUser = eachMovieByGenre.Movie_Users.FirstOrDefault(user => user.idUser == ViewBag.logedUser);
+                    if (!(eachMovieByUser == null))
+                    {
+                        number=number+1;
+                    }
+                }
+                ViewBag.Number = number;
+            }
+            (@ViewBag.Number)
+         </span>
+     </li>
+    }
+</ul>
+

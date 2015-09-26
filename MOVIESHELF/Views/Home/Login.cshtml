@@ -1,0 +1,43 @@
+﻿@model MOVIESHELF.Models.User
+
+@{
+    ViewBag.Title = "Start";
+}
+
+@{
+    Layout = "~/Views/Shared/_LayoutInicio.cshtml";
+}
+
+<div class="container" id="top-bar">
+
+   @using (Html.BeginForm("login", "Home", FormMethod.Post, new { @class = "navbar-form navbar-right" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        <div class="form-group">
+            @Html.TextBoxFor(a => a.Username, new { @class = "form-control", @placeholder = "Enter Username" })
+            @Html.ValidationMessageFor(a => a.Username)
+        </div>
+        <div class="form-group">
+            @Html.PasswordFor(a => a.Password, new { @class = "form-control", @placeholder = "Enter Password" })
+            @Html.ValidationMessageFor(a => a.Password)
+        </div>
+    <input type="submit" class="btn btn-primary" value="Sign in" />
+
+    }
+    </div>
+<div class="container" id="init-body">
+    <div><p class="text-center" id="welcome">WELCOME!</p></div>
+    <div id="introduction">
+        <p class="text-justify" id="introText">
+            <br /><br /><br /><br /><br />
+            <strong>MovieShelf </strong>is an easy and agile tool which allows you to organize your own personal movie collections.
+            Being these, either movies you have already seen or simply movies that have called your attention and you have plans to see.
+            Through the automatic search engine, by typing the title of the movie , the application will find its data on the web.
+        </p>
+    </div>
+    <div id="formRegister">
+        
+        @{Html.RenderAction("register", "Home");}
+    </div>
+</div>

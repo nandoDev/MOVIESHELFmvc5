@@ -1,0 +1,69 @@
+﻿@model MOVIESHELF.Models.Movie_Users
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Movie_Users</legend>
+
+        @Html.HiddenFor(model => model.idUser)
+        @Html.HiddenFor(model => model.IdRelMovie_User)
+        @Html.HiddenFor(model => model.idMovie)
+        
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Seen)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Seen)
+            @Html.ValidationMessageFor(model => model.Seen)
+        </div>
+        
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Favorite)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Favorite)
+            @Html.ValidationMessageFor(model => model.Favorite)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.PersonalScore)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.PersonalScore)
+            @Html.ValidationMessageFor(model => model.PersonalScore)
+        </div>
+        <p>@Model.Movies1.Title</p>
+        <div class="form-group">
+            @Html.Label("Tipe of Storage")
+           
+            <select class="list-box form-control" id="TypeStorage1" name="Storage" multiple>
+                <option selected="selected" value="none">none</option>
+                
+                <option>Blu Ray</option>
+                <option>Cd Rom</option>
+                <option>External Hard Drive</option>
+                <option>Hard Drive</option>
+                <option>VHS</option>
+                <option>Usb Drive</option>
+            </select>
+        </div>
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

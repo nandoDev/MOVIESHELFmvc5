@@ -1,0 +1,350 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DATABASE_MOVIESHELFModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="DATABASE_MOVIESHELFEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Actors" EntityType="DATABASE_MOVIESHELFModel.Actor" />
+    <EntitySet Name="Countries" EntityType="DATABASE_MOVIESHELFModel.Country" />
+    <EntitySet Name="Directors" EntityType="DATABASE_MOVIESHELFModel.Director" />
+    <EntitySet Name="Genres" EntityType="DATABASE_MOVIESHELFModel.Genre" />
+    <EntitySet Name="Movie_Actors" EntityType="DATABASE_MOVIESHELFModel.Movie_Actors" />
+    <EntitySet Name="Movie_Country" EntityType="DATABASE_MOVIESHELFModel.Movie_Country" />
+    <EntitySet Name="Movie_Director" EntityType="DATABASE_MOVIESHELFModel.Movie_Director" />
+    <EntitySet Name="Movie_Users" EntityType="DATABASE_MOVIESHELFModel.Movie_Users" />
+    <EntitySet Name="Movies_Genres" EntityType="DATABASE_MOVIESHELFModel.Movies_Genres" />
+    <EntitySet Name="Movies1" EntityType="DATABASE_MOVIESHELFModel.Movies1" />
+    <EntitySet Name="MovieUser_TypeStorage" EntityType="DATABASE_MOVIESHELFModel.MovieUser_TypeStorage" />
+    <EntitySet Name="sysdiagrams" EntityType="DATABASE_MOVIESHELFModel.sysdiagram" />
+    <EntitySet Name="TypeStorages" EntityType="DATABASE_MOVIESHELFModel.TypeStorage" />
+    <EntitySet Name="Users" EntityType="DATABASE_MOVIESHELFModel.User" />
+    <AssociationSet Name="FK_ActorMovie_Actors" Association="DATABASE_MOVIESHELFModel.FK_ActorMovie_Actors">
+      <End Role="Actor" EntitySet="Actors" />
+      <End Role="Movie_Actors" EntitySet="Movie_Actors" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Movie_CountryCountry" Association="DATABASE_MOVIESHELFModel.FK_Movie_CountryCountry">
+      <End Role="Country" EntitySet="Countries" />
+      <End Role="Movie_Country" EntitySet="Movie_Country" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Movie_DirectorDirector" Association="DATABASE_MOVIESHELFModel.FK_Movie_DirectorDirector">
+      <End Role="Director" EntitySet="Directors" />
+      <End Role="Movie_Director" EntitySet="Movie_Director" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GenreMovies_Genres" Association="DATABASE_MOVIESHELFModel.FK_GenreMovies_Genres">
+      <End Role="Genre" EntitySet="Genres" />
+      <End Role="Movies_Genres" EntitySet="Movies_Genres" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Movie_ActorsMovies" Association="DATABASE_MOVIESHELFModel.FK_Movie_ActorsMovies">
+      <End Role="Movies1" EntitySet="Movies1" />
+      <End Role="Movie_Actors" EntitySet="Movie_Actors" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MoviesMovie_Country" Association="DATABASE_MOVIESHELFModel.FK_MoviesMovie_Country">
+      <End Role="Movies1" EntitySet="Movies1" />
+      <End Role="Movie_Country" EntitySet="Movie_Country" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Movie_DirectorMovies" Association="DATABASE_MOVIESHELFModel.FK_Movie_DirectorMovies">
+      <End Role="Movies1" EntitySet="Movies1" />
+      <End Role="Movie_Director" EntitySet="Movie_Director" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Movie_Users_Movies1" Association="DATABASE_MOVIESHELFModel.FK_Movie_Users_Movies1">
+      <End Role="Movies1" EntitySet="Movies1" />
+      <End Role="Movie_Users" EntitySet="Movie_Users" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Movie_Users_Users" Association="DATABASE_MOVIESHELFModel.FK_Movie_Users_Users">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Movie_Users" EntitySet="Movie_Users" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MovieUser_TypeStorage_Movie_Users" Association="DATABASE_MOVIESHELFModel.FK_MovieUser_TypeStorage_Movie_Users">
+      <End Role="Movie_Users" EntitySet="Movie_Users" />
+      <End Role="MovieUser_TypeStorage" EntitySet="MovieUser_TypeStorage" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Movies_GenresMovies" Association="DATABASE_MOVIESHELFModel.FK_Movies_GenresMovies">
+      <End Role="Movies1" EntitySet="Movies1" />
+      <End Role="Movies_Genres" EntitySet="Movies_Genres" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MovieUser_TypeStorage_TypeStorage" Association="DATABASE_MOVIESHELFModel.FK_MovieUser_TypeStorage_TypeStorage">
+      <End Role="TypeStorage" EntitySet="TypeStorages" />
+      <End Role="MovieUser_TypeStorage" EntitySet="MovieUser_TypeStorage" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Actor">
+    <Key>
+      <PropertyRef Name="IdActor" />
+    </Key>
+    <Property Name="IdActor" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Movie_Actors" Relationship="DATABASE_MOVIESHELFModel.FK_ActorMovie_Actors" FromRole="Actor" ToRole="Movie_Actors" />
+  </EntityType>
+  <EntityType Name="Country">
+    <Key>
+      <PropertyRef Name="IdCountry" />
+    </Key>
+    <Property Name="IdCountry" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Movie_Country" Relationship="DATABASE_MOVIESHELFModel.FK_Movie_CountryCountry" FromRole="Country" ToRole="Movie_Country" />
+  </EntityType>
+  <EntityType Name="Director">
+    <Key>
+      <PropertyRef Name="IdDirectors" />
+    </Key>
+    <Property Name="IdDirectors" Type="Int32" Nullable="false" />
+    <Property Name="nameDirector" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Movie_Director" Relationship="DATABASE_MOVIESHELFModel.FK_Movie_DirectorDirector" FromRole="Director" ToRole="Movie_Director" />
+  </EntityType>
+  <EntityType Name="Genre">
+    <Key>
+      <PropertyRef Name="IdGenre" />
+    </Key>
+    <Property Name="IdGenre" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Movies_Genres" Relationship="DATABASE_MOVIESHELFModel.FK_GenreMovies_Genres" FromRole="Genre" ToRole="Movies_Genres" />
+  </EntityType>
+  <EntityType Name="Movie_Actors">
+    <Key>
+      <PropertyRef Name="IdMovie_Actor" />
+    </Key>
+    <Property Name="IdMovie_Actor" Type="Int32" Nullable="false" />
+    <Property Name="idActor" Type="Int32" Nullable="false" />
+    <Property Name="idMovie" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Actor" Relationship="DATABASE_MOVIESHELFModel.FK_ActorMovie_Actors" FromRole="Movie_Actors" ToRole="Actor" />
+    <NavigationProperty Name="Movies1" Relationship="DATABASE_MOVIESHELFModel.FK_Movie_ActorsMovies" FromRole="Movie_Actors" ToRole="Movies1" />
+  </EntityType>
+  <EntityType Name="Movie_Country">
+    <Key>
+      <PropertyRef Name="IdMovie_Country" />
+    </Key>
+    <Property Name="IdMovie_Country" Type="Int32" Nullable="false" />
+    <Property Name="idCountry" Type="Int32" Nullable="false" />
+    <Property Name="idMovie" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Country" Relationship="DATABASE_MOVIESHELFModel.FK_Movie_CountryCountry" FromRole="Movie_Country" ToRole="Country" />
+    <NavigationProperty Name="Movies1" Relationship="DATABASE_MOVIESHELFModel.FK_MoviesMovie_Country" FromRole="Movie_Country" ToRole="Movies1" />
+  </EntityType>
+  <EntityType Name="Movie_Director">
+    <Key>
+      <PropertyRef Name="IdMovie_Director" />
+    </Key>
+    <Property Name="IdMovie_Director" Type="Int32" Nullable="false" />
+    <Property Name="idMovie" Type="Int32" Nullable="false" />
+    <Property Name="idDirectors" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Director" Relationship="DATABASE_MOVIESHELFModel.FK_Movie_DirectorDirector" FromRole="Movie_Director" ToRole="Director" />
+    <NavigationProperty Name="Movies1" Relationship="DATABASE_MOVIESHELFModel.FK_Movie_DirectorMovies" FromRole="Movie_Director" ToRole="Movies1" />
+  </EntityType>
+  <EntityType Name="Movie_Users">
+    <Key>
+      <PropertyRef Name="IdRelMovie_User" />
+    </Key>
+    <Property Name="IdRelMovie_User" Type="Int32" Nullable="false" />
+    <Property Name="idUser" Type="Int32" Nullable="false" />
+    <Property Name="idMovie" Type="Int32" Nullable="false" />
+    <Property Name="Seen" Type="Boolean" />
+    <Property Name="Favorite" Type="Boolean" />
+    <Property Name="PersonalScore" Type="Int32" />
+    <NavigationProperty Name="Movies1" Relationship="DATABASE_MOVIESHELFModel.FK_Movie_Users_Movies1" FromRole="Movie_Users" ToRole="Movies1" />
+    <NavigationProperty Name="User" Relationship="DATABASE_MOVIESHELFModel.FK_Movie_Users_Users" FromRole="Movie_Users" ToRole="User" />
+    <NavigationProperty Name="MovieUser_TypeStorage" Relationship="DATABASE_MOVIESHELFModel.FK_MovieUser_TypeStorage_Movie_Users" FromRole="Movie_Users" ToRole="MovieUser_TypeStorage" />
+  </EntityType>
+  <EntityType Name="Movies_Genres">
+    <Key>
+      <PropertyRef Name="IdMovie_Genre" />
+    </Key>
+    <Property Name="IdMovie_Genre" Type="Int32" Nullable="false" />
+    <Property Name="idGenre" Type="Int32" Nullable="false" />
+    <Property Name="idMovie" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Genre" Relationship="DATABASE_MOVIESHELFModel.FK_GenreMovies_Genres" FromRole="Movies_Genres" ToRole="Genre" />
+    <NavigationProperty Name="Movies1" Relationship="DATABASE_MOVIESHELFModel.FK_Movies_GenresMovies" FromRole="Movies_Genres" ToRole="Movies1" />
+  </EntityType>
+  <EntityType Name="Movies1">
+    <Key>
+      <PropertyRef Name="IdMovie" />
+    </Key>
+    <Property Name="IdMovie" Type="Int32" Nullable="false" />
+    <Property Name="Title" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Year" Type="Int32" Nullable="false" />
+    <Property Name="PosterUrl" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="ImdbId" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Movie_Actors" Relationship="DATABASE_MOVIESHELFModel.FK_Movie_ActorsMovies" FromRole="Movies1" ToRole="Movie_Actors" />
+    <NavigationProperty Name="Movie_Country" Relationship="DATABASE_MOVIESHELFModel.FK_MoviesMovie_Country" FromRole="Movies1" ToRole="Movie_Country" />
+    <NavigationProperty Name="Movie_Director" Relationship="DATABASE_MOVIESHELFModel.FK_Movie_DirectorMovies" FromRole="Movies1" ToRole="Movie_Director" />
+    <NavigationProperty Name="Movie_Users" Relationship="DATABASE_MOVIESHELFModel.FK_Movie_Users_Movies1" FromRole="Movies1" ToRole="Movie_Users" />
+    <NavigationProperty Name="Movies_Genres" Relationship="DATABASE_MOVIESHELFModel.FK_Movies_GenresMovies" FromRole="Movies1" ToRole="Movies_Genres" />
+  </EntityType>
+  <EntityType Name="MovieUser_TypeStorage">
+    <Key>
+      <PropertyRef Name="IdRelMovieUser_TypeStorage" />
+    </Key>
+    <Property Name="IdRelMovieUser_TypeStorage" Type="Int32" Nullable="false" />
+    <Property Name="idRelMovieUser" Type="Int32" Nullable="false" />
+    <Property Name="idTypeStorage" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Movie_Users" Relationship="DATABASE_MOVIESHELFModel.FK_MovieUser_TypeStorage_Movie_Users" FromRole="MovieUser_TypeStorage" ToRole="Movie_Users" />
+    <NavigationProperty Name="TypeStorage" Relationship="DATABASE_MOVIESHELFModel.FK_MovieUser_TypeStorage_TypeStorage" FromRole="MovieUser_TypeStorage" ToRole="TypeStorage" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="TypeStorage">
+    <Key>
+      <PropertyRef Name="IdTypeStorage" />
+    </Key>
+    <Property Name="IdTypeStorage" Type="Int32" Nullable="false" />
+    <Property Name="TypeStorage1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="MovieUser_TypeStorage" Relationship="DATABASE_MOVIESHELFModel.FK_MovieUser_TypeStorage_TypeStorage" FromRole="TypeStorage" ToRole="MovieUser_TypeStorage" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="IdUsers" />
+    </Key>
+    <Property Name="IdUsers" Type="Int32" Nullable="false" />
+    <Property Name="Username" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="email" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="Password" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Movie_Users" Relationship="DATABASE_MOVIESHELFModel.FK_Movie_Users_Users" FromRole="User" ToRole="Movie_Users" />
+  </EntityType>
+  <Association Name="FK_ActorMovie_Actors">
+    <End Type="DATABASE_MOVIESHELFModel.Actor" Role="Actor" Multiplicity="1" />
+    <End Type="DATABASE_MOVIESHELFModel.Movie_Actors" Role="Movie_Actors" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Actor">
+        <PropertyRef Name="IdActor" />
+      </Principal>
+      <Dependent Role="Movie_Actors">
+        <PropertyRef Name="idActor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Movie_CountryCountry">
+    <End Type="DATABASE_MOVIESHELFModel.Country" Role="Country" Multiplicity="1" />
+    <End Type="DATABASE_MOVIESHELFModel.Movie_Country" Role="Movie_Country" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country">
+        <PropertyRef Name="IdCountry" />
+      </Principal>
+      <Dependent Role="Movie_Country">
+        <PropertyRef Name="idCountry" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Movie_DirectorDirector">
+    <End Type="DATABASE_MOVIESHELFModel.Director" Role="Director" Multiplicity="1" />
+    <End Type="DATABASE_MOVIESHELFModel.Movie_Director" Role="Movie_Director" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Director">
+        <PropertyRef Name="IdDirectors" />
+      </Principal>
+      <Dependent Role="Movie_Director">
+        <PropertyRef Name="idDirectors" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GenreMovies_Genres">
+    <End Type="DATABASE_MOVIESHELFModel.Genre" Role="Genre" Multiplicity="1" />
+    <End Type="DATABASE_MOVIESHELFModel.Movies_Genres" Role="Movies_Genres" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Genre">
+        <PropertyRef Name="IdGenre" />
+      </Principal>
+      <Dependent Role="Movies_Genres">
+        <PropertyRef Name="idGenre" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Movie_ActorsMovies">
+    <End Type="DATABASE_MOVIESHELFModel.Movies1" Role="Movies1" Multiplicity="1" />
+    <End Type="DATABASE_MOVIESHELFModel.Movie_Actors" Role="Movie_Actors" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Movies1">
+        <PropertyRef Name="IdMovie" />
+      </Principal>
+      <Dependent Role="Movie_Actors">
+        <PropertyRef Name="idMovie" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MoviesMovie_Country">
+    <End Type="DATABASE_MOVIESHELFModel.Movies1" Role="Movies1" Multiplicity="1" />
+    <End Type="DATABASE_MOVIESHELFModel.Movie_Country" Role="Movie_Country" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Movies1">
+        <PropertyRef Name="IdMovie" />
+      </Principal>
+      <Dependent Role="Movie_Country">
+        <PropertyRef Name="idMovie" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Movie_DirectorMovies">
+    <End Type="DATABASE_MOVIESHELFModel.Movies1" Role="Movies1" Multiplicity="1" />
+    <End Type="DATABASE_MOVIESHELFModel.Movie_Director" Role="Movie_Director" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Movies1">
+        <PropertyRef Name="IdMovie" />
+      </Principal>
+      <Dependent Role="Movie_Director">
+        <PropertyRef Name="idMovie" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Movie_Users_Movies1">
+    <End Type="DATABASE_MOVIESHELFModel.Movies1" Role="Movies1" Multiplicity="1" />
+    <End Type="DATABASE_MOVIESHELFModel.Movie_Users" Role="Movie_Users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Movies1">
+        <PropertyRef Name="IdMovie" />
+      </Principal>
+      <Dependent Role="Movie_Users">
+        <PropertyRef Name="idMovie" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Movie_Users_Users">
+    <End Type="DATABASE_MOVIESHELFModel.User" Role="User" Multiplicity="1" />
+    <End Type="DATABASE_MOVIESHELFModel.Movie_Users" Role="Movie_Users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="IdUsers" />
+      </Principal>
+      <Dependent Role="Movie_Users">
+        <PropertyRef Name="idUser" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MovieUser_TypeStorage_Movie_Users">
+    <End Type="DATABASE_MOVIESHELFModel.Movie_Users" Role="Movie_Users" Multiplicity="1" />
+    <End Type="DATABASE_MOVIESHELFModel.MovieUser_TypeStorage" Role="MovieUser_TypeStorage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Movie_Users">
+        <PropertyRef Name="IdRelMovie_User" />
+      </Principal>
+      <Dependent Role="MovieUser_TypeStorage">
+        <PropertyRef Name="idRelMovieUser" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Movies_GenresMovies">
+    <End Type="DATABASE_MOVIESHELFModel.Movies1" Role="Movies1" Multiplicity="1" />
+    <End Type="DATABASE_MOVIESHELFModel.Movies_Genres" Role="Movies_Genres" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Movies1">
+        <PropertyRef Name="IdMovie" />
+      </Principal>
+      <Dependent Role="Movies_Genres">
+        <PropertyRef Name="idMovie" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MovieUser_TypeStorage_TypeStorage">
+    <End Type="DATABASE_MOVIESHELFModel.TypeStorage" Role="TypeStorage" Multiplicity="1" />
+    <End Type="DATABASE_MOVIESHELFModel.MovieUser_TypeStorage" Role="MovieUser_TypeStorage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TypeStorage">
+        <PropertyRef Name="IdTypeStorage" />
+      </Principal>
+      <Dependent Role="MovieUser_TypeStorage">
+        <PropertyRef Name="idTypeStorage" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

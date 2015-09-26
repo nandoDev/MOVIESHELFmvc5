@@ -1,0 +1,31 @@
+﻿@model IEnumerable<MOVIESHELF.Models.Movie_Users>
+
+@{ViewBag.Title = "Browse by Year";}
+
+
+@if (Model.Count() > 0)
+{
+    <h3 class="text-center"> Movies of the year @ViewBag.year</h3>
+
+    <ul id="movie-list">
+        @foreach (var movieUser in Model)
+        {
+            <li id="item-movie-list">
+                <a href="@Url.Action("Details", new {id = movieUser.Movies1.IdMovie})">
+                    <div>
+                        <div class="fotoPelicula">
+                            <img alt="@movieUser.Movies1.Title" src="@movieUser.Movies1.PosterUrl" id="imagen">
+                        </div>
+                        <div class="text-center">
+                            <h6><strong>@movieUser.Movies1.Title</strong><strong id="textoAño"> (@movieUser.Movies1.Year)</strong></h6>
+                        </div>
+                    </div>
+                </a>
+            </li>
+        }
+    </ul>
+}
+else
+{
+    <span>No Movies founded </span>
+}

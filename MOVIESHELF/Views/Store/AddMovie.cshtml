@@ -1,0 +1,150 @@
+﻿@model MOVIESHELF.Models.Movie_Users
+
+@{
+    ViewBag.Title = "AddMovieOpcion2";
+}
+
+<h2 class="text-center">Create a Movie</h2>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <div class="container" id="movie-Create">
+        <div class="container" id="movie-Create-form">
+            <div id="col-left-movieCreate">
+                <div id="picture-movie-Create">
+                    <img alt="#" id="imagen-Create">
+                </div>
+            </div>
+            <div id="col-right-movieCreate">
+                <div class="form-group" style="border-bottom:solid 1px #808080">
+                    @Html.RadioButtonFor(model => model.Seen, "true")
+                    @Html.Label("Seen")
+                    @Html.RadioButtonFor(model => model.Seen, "false")
+                    @Html.Label("Not Seen")
+                    @Html.ValidationMessageFor(model => model.Seen)
+                </div>
+                <div class="form-group" style="border-bottom:solid 1px #808080">
+                    @Html.LabelFor(model => model.PersonalScore):
+                    <input type="range" value="1" step="1" id="backing4">
+                    <div class="rateit" data-rateit-backingfld="#backing4" data-rateit-resetable="false" data-rateit-ispreset="true"
+                         data-rateit-min="0" data-rateit-max="10"></div>
+                    @Html.ValidationMessageFor(model => model.PersonalScore)
+                </div>
+                <div class="form-group" style="border-bottom:solid 1px #808080">
+                    @Html.RadioButtonFor(model => model.Favorite, "false")
+                    @Html.Label("Favorite")
+                    @Html.RadioButtonFor(model => model.Favorite, "true")
+                    @Html.Label("Unfavorite")
+                    @Html.RadioButtonFor(model => model.Favorite, "")
+                    @Html.Label("none")
+                    @Html.ValidationMessageFor(model => model.Favorite)
+                </div>
+                <div  style="border-bottom:solid 1px #808080">
+                    <h5>@Html.Label("Type of Storage")</h5>
+                   
+                        <fieldset >
+                            <div style="float:left">
+                                <p><input type="checkbox" name="Storage" id="TypeStorage0" value="none"><label> none</label></p>
+                                <p><input type="checkbox" name="Storage" id="TypeStorage1" value="Blu Ray"><label> Blu Ray</label></p>
+                                <p><input type="checkbox" name="Storage" id="TypeStorage2" value="Cd Rom"><label for="TypeStorage2"> Cd Rom</label></p>
+                                <p><input type="checkbox" name="Storage" id="TypeStorage4" value="Hard Drive"><label for="TypeStorage4"> Hard Drive</label></p>
+                            </div>
+                            <div style="float:left">
+                                <p><input type="checkbox" name="Storage" id="TypeStorage3" value="External Hard Drive"><label for="TypeStorage3"> External Hard Drive</label></p>
+                                
+                                <p><input type="checkbox" name="Storage" id="TypeStorage5" value="VHS"><label for="TypeStorage5"> VHS</label></p>
+                                <p><input type="checkbox" name="Storage" id="TypeStorage6" value="Usb Drive"><label for="TypeStorage5"> Usb Drive</label></p>
+                            </div>
+                        </fieldset>
+                 </div>
+            </div>
+        </div>
+        <div id="movie-Create-form-unmodified">
+            <div class="form-group">
+                @Html.Label("Title")
+                <input type="text" id="Movies1_Title" name="Movies1.Title" class="form-control" readonly />
+                @Html.ValidationMessageFor(model => model.Movies1.Title)
+            </div>
+            <div class="form-group">
+                @Html.Label("Year")
+                <input type="text" id="Movies1_Year" name="Movies1.Year" class="form-control" readonly />
+            </div>
+            <div class="form-group">
+                @Html.Label("Genres")
+                <input type="text" id="Genre" name="nameGenre" class="form-control" readonly />
+            </div>
+            <div class="form-group">
+                @Html.Label("Director")
+                <input type="text" id="Director" name="nameDirector" class="form-control" readonly />
+            </div>
+            <div class="form-group">
+                @Html.Label("Countrys")
+                <input type="text" id="Country" name="nameCountry" class="form-control" readonly />
+            </div>
+            <div class="form-group">
+                @Html.Label("Actors")
+                <input type="text" id="Actor" name="nameActor" class="form-control" readonly />
+            </div>
+            <div class="form-group">
+                @Html.Label("Link Imdb")
+                <input type="text" id="Movies1_ImdbId" name="Movies1.ImdbId" class="form-control" readonly />
+                @Html.ValidationMessageFor(model => model.Movies1.ImdbId)
+            </div>
+            <div>
+                @Html.HiddenFor(model => model.Movies1.PosterUrl)
+            </div>
+        </div>
+        <p>
+            <input type="submit" value="Create" class="btn-primary" />
+        </p>
+    </div>
+}
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+<div id="imdbWait"></div>
+
+
+   
+<script type="text/javascript">
+    var resultFromimdb;
+    
+    $(document).ready(function (e) {
+        var imdbTitle = "@ViewBag.movieTitle";
+        var resturl = "http://omdbapi.com/?t=" + imdbTitle + "";
+        $('#imdbWait').html('<center><img src="/Content/img/loading.gif" alt="loading..."></center>');
+       
+        $.ajax({
+            url: resturl,
+            dataType: 'json',
+            success: function (data) {
+
+                resultFromimdb = data;
+                
+                var title = data.Title;
+                var year = data.Year;
+                var country= data.Country;
+                var genre = data.Genre;
+                var directors = data.Director;
+                var actors= data.Actors;
+                var poster = data.Poster;
+                var imdbLink = "http://www.imdb.com/title/" + data.imdbID + "";
+                
+                $("#Movies1_Title").val(title);
+                $("#Movies1_Year").val(year);
+                $("#Movies1_PosterUrl").val(poster);
+                $("#Movies1_ImdbId").val(imdbLink);
+                $('#imagen-Create').attr("src", poster);
+              
+                $("#Director").val(directors);
+                $("#Actor").val(actors);
+                $("#Country").val(country);
+                $("#Genre").val(genre);
+
+                $('#imdbWait').html('<span></span>');
+            }
+        });
+    });
+</script>
+

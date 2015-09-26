@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DATABASE_MOVIESHELFModelStoreContainer" CdmEntityContainer="DATABASE_MOVIESHELFEntities1">
+    <EntitySetMapping Name="Actors">
+      <EntityTypeMapping TypeName="DATABASE_MOVIESHELFModel.Actor">
+        <MappingFragment StoreEntitySet="Actors">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="IdActor" ColumnName="IdActor" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Countries">
+      <EntityTypeMapping TypeName="DATABASE_MOVIESHELFModel.Country">
+        <MappingFragment StoreEntitySet="Countries">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="IdCountry" ColumnName="IdCountry" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Directors">
+      <EntityTypeMapping TypeName="DATABASE_MOVIESHELFModel.Director">
+        <MappingFragment StoreEntitySet="Directors">
+          <ScalarProperty Name="nameDirector" ColumnName="nameDirector" />
+          <ScalarProperty Name="IdDirectors" ColumnName="IdDirectors" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Genres">
+      <EntityTypeMapping TypeName="DATABASE_MOVIESHELFModel.Genre">
+        <MappingFragment StoreEntitySet="Genres">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="IdGenre" ColumnName="IdGenre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Movie_Actors">
+      <EntityTypeMapping TypeName="DATABASE_MOVIESHELFModel.Movie_Actors">
+        <MappingFragment StoreEntitySet="Movie_Actors">
+          <ScalarProperty Name="idMovie" ColumnName="idMovie" />
+          <ScalarProperty Name="idActor" ColumnName="idActor" />
+          <ScalarProperty Name="IdMovie_Actor" ColumnName="IdMovie_Actor" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Movie_Country">
+      <EntityTypeMapping TypeName="DATABASE_MOVIESHELFModel.Movie_Country">
+        <MappingFragment StoreEntitySet="Movie_Country">
+          <ScalarProperty Name="idMovie" ColumnName="idMovie" />
+          <ScalarProperty Name="idCountry" ColumnName="idCountry" />
+          <ScalarProperty Name="IdMovie_Country" ColumnName="IdMovie_Country" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Movie_Director">
+      <EntityTypeMapping TypeName="DATABASE_MOVIESHELFModel.Movie_Director">
+        <MappingFragment StoreEntitySet="Movie_Director">
+          <ScalarProperty Name="idDirectors" ColumnName="idDirectors" />
+          <ScalarProperty Name="idMovie" ColumnName="idMovie" />
+          <ScalarProperty Name="IdMovie_Director" ColumnName="IdMovie_Director" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Movie_Users">
+      <EntityTypeMapping TypeName="DATABASE_MOVIESHELFModel.Movie_Users">
+        <MappingFragment StoreEntitySet="Movie_Users">
+          <ScalarProperty Name="PersonalScore" ColumnName="PersonalScore" />
+          <ScalarProperty Name="Favorite" ColumnName="Favorite" />
+          <ScalarProperty Name="Seen" ColumnName="Seen" />
+          <ScalarProperty Name="idMovie" ColumnName="idMovie" />
+          <ScalarProperty Name="idUser" ColumnName="idUser" />
+          <ScalarProperty Name="IdRelMovie_User" ColumnName="IdRelMovie_User" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Movies_Genres">
+      <EntityTypeMapping TypeName="DATABASE_MOVIESHELFModel.Movies_Genres">
+        <MappingFragment StoreEntitySet="Movies_Genres">
+          <ScalarProperty Name="idMovie" ColumnName="idMovie" />
+          <ScalarProperty Name="idGenre" ColumnName="idGenre" />
+          <ScalarProperty Name="IdMovie_Genre" ColumnName="IdMovie_Genre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Movies1">
+      <EntityTypeMapping TypeName="DATABASE_MOVIESHELFModel.Movies1">
+        <MappingFragment StoreEntitySet="Movies1">
+          <ScalarProperty Name="ImdbId" ColumnName="ImdbId" />
+          <ScalarProperty Name="PosterUrl" ColumnName="PosterUrl" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="IdMovie" ColumnName="IdMovie" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MovieUser_TypeStorage">
+      <EntityTypeMapping TypeName="DATABASE_MOVIESHELFModel.MovieUser_TypeStorage">
+        <MappingFragment StoreEntitySet="MovieUser_TypeStorage">
+          <ScalarProperty Name="idTypeStorage" ColumnName="idTypeStorage" />
+          <ScalarProperty Name="idRelMovieUser" ColumnName="idRelMovieUser" />
+          <ScalarProperty Name="IdRelMovieUser_TypeStorage" ColumnName="IdRelMovieUser_TypeStorage" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="DATABASE_MOVIESHELFModel.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="definition" ColumnName="definition" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TypeStorages">
+      <EntityTypeMapping TypeName="DATABASE_MOVIESHELFModel.TypeStorage">
+        <MappingFragment StoreEntitySet="TypeStorage">
+          <ScalarProperty Name="TypeStorage1" ColumnName="TypeStorage" />
+          <ScalarProperty Name="IdTypeStorage" ColumnName="IdTypeStorage" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="DATABASE_MOVIESHELFModel.User">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="IdUsers" ColumnName="IdUsers" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,33 @@
+﻿@model IEnumerable<MOVIESHELF.Models.Director>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.nameDirector)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.nameDirector)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.IdDirectors }) |
+            @Html.ActionLink("Details", "Details", new { id=item.IdDirectors }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.IdDirectors })
+        </td>
+    </tr>
+}
+
+</table>
